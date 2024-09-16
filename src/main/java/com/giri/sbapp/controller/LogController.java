@@ -125,6 +125,12 @@ public class LogController {
         return logService.getLogsByDate(localDate);
     }
     
+    @GetMapping("/by-ac-unit-and-date/{acUnitId}")
+    public List<Log> getLogsByAcUnitIdAndDate(@PathVariable Long acUnitId, @RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return logService.getLogsByAcUnitIdAndDate(acUnitId, localDate);
+    }
+    
 
 
     

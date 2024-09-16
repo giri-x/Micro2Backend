@@ -80,5 +80,14 @@ public class ServiceRequestServiceImpl implements ServiceRequestService {
 	    public List<ServiceRequest> getAllServiceRequests() {
 	        return serviceRequestRepository.findAll();
 	    }
+	    
+	    @Override
+	    public ServiceRequest getRequestByAcUnitIdAndRequestId(Long acUnitId, Long requestId) {
+	        ServiceRequest request = serviceRequestRepository.findById(requestId);
+	        if (request != null && request.getAcUnit().getId().equals(acUnitId)) {
+	            return request;
+	        }
+	        return null;
+	    }
 
 }

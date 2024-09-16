@@ -33,4 +33,5 @@ public interface LogService {
     List<Log> getLogsByACUnitAndDate(Long acUnitId, LocalDate date);
 	List<Log> getLogsByAcUnitId(Long acUnitId);
 	 List<Log> getLogsByDate(LocalDate date);
+	 List<Log> getLogsByAcUnitIdAndDate(Long acUnitId, LocalDate date);
 }

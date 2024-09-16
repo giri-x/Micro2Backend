@@ -92,5 +92,7 @@ public class ACUnitController {
     public List<ACUnit> getACUnitsByTechnician(@PathVariable("technicianId") Long technicianId) {
         return service.getACUnitsByTechnician(technicianId);
     }
+    
+    
 
 }

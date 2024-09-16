@@ -106,10 +106,10 @@ public String insertTechnician(
     }
     return msg;
 }
-//	@GetMapping("{id}")
-//	public Technician getTechnicianById (@PathVariable("id") int id) {
-//		return service.getTechnician(id);
-//	}
+	@GetMapping("{id}")
+	public Technician getTechnicianById (@PathVariable("id") int id) {
+		return service.getTechnician(id);
+	}
 
 @GetMapping("/image/{id}")
 public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
@@ -208,5 +208,40 @@ public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
    		
    		return (ResponseEntity<?>) ResponseEntity.badRequest();
    	}
+    
+    
+    
+    @PostMapping("/send-notification")
+    public ResponseEntity<String> sendNotification(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String subject = request.get("subject");
+        String message = request.get("message");
+
+        try {
+            emailService.sendSimpleMessage(email, subject, message);
+            return ResponseEntity.ok("Notification sent successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error sending notification.");
+        }
+    }
+    
+    @PutMapping("/{id}/update-hours")
+    public void updateTotalHours(@PathVariable int id, @RequestParam double totalHours) {
+        service.updateTotalHours(id, totalHours);
+    }
+    
+    @PutMapping("/{id}/update-password")
+    public ResponseEntity<String> updatePassword(@PathVariable int id, @RequestParam String newPassword) {
+        try {
+            boolean updated = service.updatePassword(id, newPassword);
+            if (updated) {
+                return ResponseEntity.ok("Password updated successfully.");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update password.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating password: " + e.getMessage());
+        }
+    }
 
 }

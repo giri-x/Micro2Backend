@@ -138,4 +138,13 @@ public class LogRepoImpl implements LogRepo {
         typedQuery.setParameter("date", date);
         return typedQuery.getResultList();
     }
+    
+    @Override
+    public List<Log> findLogsByAcUnitIdAndDate(Long acUnitId, LocalDate date) {
+        String jpql = "SELECT l FROM Log l WHERE l.acUnit.id = :acUnitId AND l.date = :date";
+        TypedQuery<Log> query = em.createQuery(jpql, Log.class);
+        query.setParameter("acUnitId", acUnitId);
+        query.setParameter("date", date);
+        return query.getResultList();
+    }
 }

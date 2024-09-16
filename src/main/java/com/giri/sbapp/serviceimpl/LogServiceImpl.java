@@ -110,5 +110,10 @@ public class LogServiceImpl implements LogService {
     public List<Log> getLogsByDate(LocalDate date) {
         return logRepo.findByDate(date);
     }
+    
+    @Override
+    public List<Log> getLogsByAcUnitIdAndDate(Long acUnitId, LocalDate date) {
+        return logRepo.findLogsByAcUnitIdAndDate(acUnitId, date);
+    }
 }
 

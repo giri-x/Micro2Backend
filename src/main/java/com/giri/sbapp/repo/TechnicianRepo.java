@@ -24,5 +24,9 @@ public interface TechnicianRepo {
 	public Optional<Technician> findbyemail(String email);
 
 	public Technician techLogin(String email, String password);
+	
+	
+	
+	
 
 }

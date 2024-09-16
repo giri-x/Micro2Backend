@@ -19,5 +19,8 @@ public interface TechnicianService {
 	public void updateTechnician(Technician tech);
 	public String deleteTechnicianId(int id);
 //	public Optional<Technician> getTechnician(Long id);
+	//void updateTechnicianTotalHours(int technicianId, double hoursToAdd);
+	 void updateTotalHours(int technicianId, double totalHours);
+	 boolean updatePassword(int id, String newPassword);
 
 }

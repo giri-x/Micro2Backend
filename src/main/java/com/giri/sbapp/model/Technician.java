@@ -171,94 +171,90 @@ public class Technician {
 //    private ACUnit acunit;
 
     @Lob
-    @Column(name = "technicianimage", length=1000)
+    @Column(name = "technicianimage", length=1000000000)
     private byte[] technicianImage;
+    
+    @Column(name = "total_hours_consumed")
+    private Double totalHoursConsumed; // New field for total hours consumed
 
     public Technician() {
         super();
         // Default constructor
     }
 
-    public Technician(int id, String name, String email, String passwordHash, Set<Log> logs,
-                      Set<ServiceRequest> serviceRequests, ACUnit acunit, byte[] technicianImage) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.passwordHash = passwordHash;
-//        this.logs = logs;
-//        this.serviceRequests = serviceRequests;
-        this.technicianImage = technicianImage;
-    }
+	public Technician(int id, String name, String email, String passwordHash, byte[] technicianImage,
+			double totalHoursConsumed) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.technicianImage = technicianImage;
+		this.totalHoursConsumed = totalHoursConsumed;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
+	public String getPasswordHash() {
+		return passwordHash;
+	}
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
 
-//    public Set<Log> getLogs() {
-//        return logs;
-//    }
+	public byte[] getTechnicianImage() {
+		return technicianImage;
+	}
+
+	public void setTechnicianImage(byte[] technicianImage) {
+		this.technicianImage = technicianImage;
+	}
 //
-//    public void setLogs(Set<Log> logs) {
-//        this.logs = logs;
-//    }
+//	public double getTotalHoursConsumed() {
+//		return totalHoursConsumed;
+//	}
 
-//    public Set<ServiceRequest> getServiceRequests() {
-//        return serviceRequests;
-//    }
+//	public void setTotalHoursConsumed(double totalHoursConsumed) {
+//		this.totalHoursConsumed = totalHoursConsumed;
+//	}
 
-//    public void setServiceRequests(Set<ServiceRequest> serviceRequests) {
-//        this.serviceRequests = serviceRequests;
-//    }
-
-//    public ACUnit getAcunit() {
-//        return acunit;
-//    }
-//
-//    public void setAcunit(ACUnit acunit) {
-//        this.acunit = acunit;
-//    }
-
-    public byte[] getTechnicianImage() {
-        return technicianImage;
+//	public void setTotalHoursConsumed(Double totalHoursConsumed) {
+//		this.totalHoursConsumed = totalHoursConsumed;
+//	}
+//	
+	
+	public Double getTotalHoursConsumed() {
+        return totalHoursConsumed;
     }
 
-    public void setTechnicianImage(byte[] technicianImage) {
-        this.technicianImage = technicianImage;
+    public void setTotalHoursConsumed(Double totalHoursConsumed) {
+        this.totalHoursConsumed = totalHoursConsumed;
     }
+	
 
-//    @Override
-//    public String toString() {
-//        return "Technician [id=" + id + ", name=" + name + ", email=" + email + ", passwordHash=" + passwordHash
-//                + ", logs=" + logs + ", serviceRequests=" + serviceRequests + "]";
-//    }
+   
 }
 

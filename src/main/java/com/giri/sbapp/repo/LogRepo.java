@@ -32,4 +32,5 @@ public interface LogRepo {
     List<Log> findLogsByACUnitAndDate(Long acUnitId, LocalDate date);
     List<Log> findByAcUnitId(Long acUnitId);
     List<Log> findByDate(LocalDate date);
+    List<Log> findLogsByAcUnitIdAndDate(Long acUnitId, LocalDate date);
 }

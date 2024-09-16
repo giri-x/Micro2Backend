@@ -182,9 +182,21 @@ public class ServiceRequestController {
 
 	    
 	    @GetMapping("/")
-	    public ResponseEntity<List<ServiceRequest>> getAllServiceRequests() {
+	    public ResponseEntity <List<ServiceRequest>> getAllServiceRequests() {
 	        List<ServiceRequest> requests = serviceRequestService.getAllServiceRequests();
 	        return ResponseEntity.ok(requests);
+	    }
+	    
+	    @GetMapping("/ac-unit/{acUnitId}/request/{requestId}")
+	    public ResponseEntity<ServiceRequest> getRequestByAcUnitIdAndRequestId(
+	            @PathVariable Long acUnitId,
+	            @PathVariable Long requestId) {
+	        ServiceRequest request = serviceRequestService.getRequestByAcUnitIdAndRequestId(acUnitId, requestId);
+	        if (request != null) {
+	            return ResponseEntity.ok(request);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
 	    }
 	}
 

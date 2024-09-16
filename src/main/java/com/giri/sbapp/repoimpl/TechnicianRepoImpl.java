@@ -74,5 +74,7 @@ public class TechnicianRepoImpl implements TechnicianRepo {
 		q.setParameter(2, password);
 		return (Technician) q.getSingleResult();
 	}
+	
+	
 
 }

@@ -10,5 +10,6 @@ public interface ServiceRequestService {
 	    ServiceRequest approveServiceRequest(Long id);
 	    List<ServiceRequest> getRequestsByAcUnitId(Long acUnitId);
 	    List<ServiceRequest> getAllServiceRequests();
+	    ServiceRequest getRequestByAcUnitIdAndRequestId(Long acUnitId, Long requestId);
 
 }

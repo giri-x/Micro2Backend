@@ -36,11 +36,6 @@ public class TechnicianServiceImpl implements TechnicianService {
 	public Technician getTechnician(int id) {
 		return repo.findById(id);
 	}
-	
-//	 @Override
-//	    public Optional<Technician> getTechnician(int id) {
-//	        return repo.findById(id);
-//	    }
 
 	@Override
 	public List<Technician> getAllTechnician() {
@@ -87,11 +82,11 @@ public class TechnicianServiceImpl implements TechnicianService {
 	  
 	  @Transactional
 	    @Override
-	    public boolean updatePassword(int id, String newPassword) {
+	    public boolean updatePassword(int id, String passwordHash) {
 	        try {
 	            Technician technician = entitymanager.find(Technician.class, id);
 	            if (technician != null) {
-	                technician.setPasswordHash(newPassword); // Update password
+	                technician.setPasswordHash(passwordHash); // Update password
 	                entitymanager.merge(technician); // Save changes
 	                return true;
 	            }

@@ -61,7 +61,7 @@ public class ServiceRequestController {
 	                String technicianEmail = technician.getEmail();
 	                
 	                if (technicianEmail != null) {
-	                    // Send an email to the technician
+	                  
 	                    sendServiceRequestEmail(technicianEmail, createdRequest);
 	                }
 	            }
@@ -98,53 +98,6 @@ public class ServiceRequestController {
 	        return ResponseEntity.ok(requests);
 	    }
 	    
-//	    @PutMapping("/approve/{id}")
-//	    public ResponseEntity<ServiceRequest> approveServiceRequest(@PathVariable Long id) {
-//	        try {
-//	            ServiceRequest serviceRequest = serviceRequestService.approveServiceRequest(id);
-//	            // Assuming the service sends an email when the request is approved
-//	            // serviceRequestService.sendApprovalEmail(serviceRequest);
-//	            return new ResponseEntity<>(serviceRequest, HttpStatus.OK);
-//	        } catch (EntityNotFoundException e) {
-//	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	        } catch (IllegalStateException e) {
-//	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//	        }
-//	    }
-	    
-	    
-//	    @PutMapping("/approve/{id}")
-//	    public ResponseEntity<ServiceRequest> approveServiceRequest(@PathVariable Long id) {
-//	        try {
-//	            // Approve the service request
-//	            ServiceRequest serviceRequest = serviceRequestService.approveServiceRequest(id);
-//
-//	            // Fetch the technician's email
-//	            int technicianId = serviceRequest.getTechnician().getId();
-//	            Optional<Technician> technicianOpt = technicianService.getTechnician(technicianId);
-//	            if (technicianOpt.isPresent()) {
-//	                Technician technician = technicianOpt.get();
-//	                String technicianEmail = technician.getEmail();
-//
-//	                if (technicianEmail != null) {
-//	                    // Send an email to the technician
-//	                    String subject = "Service Request Approved";
-//	                    String body = "Dear " + technician.getName() + ",\n\n" +
-//	                            "Your service request with ID " + id + " has been approved.\n\n" +
-//	                            "Please review the request and take necessary actions.\n\n" +
-//	                            "Best regards,\n" +
-//	                            "The Service Team";
-//	                    emailService.sendSimpleMessage(technicianEmail, subject, body);
-//	                }
-//	            }
-//
-//	            return new ResponseEntity<>(serviceRequest, HttpStatus.OK);
-//	        } catch (EntityNotFoundException e) {
-//	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	        } catch (IllegalStateException e) {
-//	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//	        }
-//	    }
 	    
 	    @PutMapping("/approve/{id}")
 	    public ResponseEntity<ServiceRequest> approveServiceRequest(@PathVariable Long id) {
@@ -162,7 +115,7 @@ public class ServiceRequestController {
 	                    // Send an email to the technician
 	                    String subject = "Service Request Approved";
 	                    String body = "Dear " + technician.getName() + ",\n\n" +
-	                            "Your service request with ID " + id + " has been approved.\n\n" +
+	                            "Your service request with ID " + id + " has been assigned to GS AC Agency.\n\n" +
 	                            "Please review the request and take necessary actions.\n\n" +
 	                            "Best regards,\n" +
 	                            "The Service Team";

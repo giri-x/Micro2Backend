@@ -35,42 +35,6 @@ public class TechnicianController {
 	
 	 @Autowired
 	 private EmailService emailService;
-	
-//	@PostMapping
-//	public String insertTechnician(@RequestBody Technician tech) {
-//		
-//		String msg="";
-//		try {
-//			service.addTechnician(tech);
-//			msg+="add Sucess";
-//			
-//		}catch(Exception e) {
-//			
-//			msg+="add Failure";
-//		}
-//		return msg;
-//	}
-	 
-//	  @PostMapping
-//	    public String insertTechnician(@RequestBody Technician tech) {
-//	        String msg = "";
-//	        try {
-//	            service.addTechnician(tech);
-//	            emailService.sendSimpleMessage(
-//	                tech.getEmail(),
-//	                "Welcome to AC Service",
-//	                "Dear " + tech.getName() + ",\n\n" +
-//	                "Welcome to AC Service! Your account has been created successfully.\n\n" +
-//	                "Best regards,\n" +
-//	                "The AC Service Team"
-//	            );
-//	            msg += "Add Success";
-//	        } catch (Exception e) {
-//	            msg += "Add Failure";
-//	        }
-//	        return msg;
-//	    }
-//	
 
 @PostMapping
 public String insertTechnician(
@@ -96,8 +60,8 @@ public String insertTechnician(
             "Welcome to AC Service",
             "Dear " + tech.getName() + ",\n\n" +
             "Welcome to AC Service! Your account has been created successfully  "
-            + " login with your email ID & your password is 12345 \n\n" +
-            "Best regards,\n" +
+            + " login with your email ID & your password is 12345 \n\n" +"Click here to Contact Admin "+"https://api.whatsapp.com/send?phone=919677617095"
+            +"Best regards,\n" +
             "The AC Service Team"
         );
         msg += "Add Success";
@@ -136,21 +100,6 @@ public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
 		return service.getAllTechnician();
 	}
 	
-	@PutMapping
-	public String updateTechnician(@RequestBody Technician tech) {
-		
-		String msg="";
-		try {
-			service.updateTechnician(tech);
-			msg+="update Success";
-			
-		}catch(Exception e) {
-			
-			msg+="update Failure";
-		}
-		return msg;
-	}
-	
 	@DeleteMapping("{id}")
 	public String deleteTechnicianById(@PathVariable("id") int id) {
 		String msg="";
@@ -170,7 +119,7 @@ public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
     @PostMapping("/loginTech")
     public ResponseEntity<?> login(@RequestBody Technician tech) {
         try {
-            // Find the  by email
+            
             Optional<Technician> techOptional = service.findbyemail(tech.getEmail());
             if (!techOptional.isPresent()) {
                 return ResponseEntity.badRequest().body("Invalid email");
@@ -180,7 +129,7 @@ public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
             Map<String, Integer> map=new HashMap<>();
             map.put("userId", userFound.getId());
  
-            // Check if password matches
+           
             if (!tech.getPasswordHash().equals(userFound.getPasswordHash())) {
                 return ResponseEntity.badRequest().body("Invalid password");
             }
@@ -230,10 +179,12 @@ public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
         service.updateTotalHours(id, totalHours);
     }
     
+    
     @PutMapping("/{id}/update-password")
-    public ResponseEntity<String> updatePassword(@PathVariable int id, @RequestParam String newPassword) {
+    public ResponseEntity<String> updatePassword(@PathVariable int id, @RequestBody Map<String, String> requestBody) {
+        String passwordHash = requestBody.get("passwordHash");
         try {
-            boolean updated = service.updatePassword(id, newPassword);
+            boolean updated = service.updatePassword(id, passwordHash);
             if (updated) {
                 return ResponseEntity.ok("Password updated successfully.");
             } else {
@@ -243,5 +194,39 @@ public ResponseEntity<?> getTechnicianImage(@PathVariable("id") int id) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating password: " + e.getMessage());
         }
     }
+
+    
+    
+    @PutMapping("/doTechnicianUpdate")
+    public String updateTechnician(@RequestParam("id") int id,
+                                    @RequestParam("name") String name,
+                                    @RequestParam("email") String email,
+                                    @RequestParam("passwordHash") String passwordHash,
+                                    @RequestParam("totalHoursConsumed") Double totalHoursConsumed,
+                                    @RequestParam("technicianImage") MultipartFile image) {
+
+        String msg = "";
+        try {
+            // Create a Technician object and set its properties
+            Technician tech = new Technician();
+            tech.setId(id);
+            tech.setName(name);
+            tech.setEmail(email);
+            tech.setPasswordHash(passwordHash);
+            tech.setTotalHoursConsumed(totalHoursConsumed);
+
+            tech.setTechnicianImage(image.getBytes());
+            service.updateTechnician(tech);
+
+            msg += "Update Success";
+
+        } catch (Exception e) {
+            msg += "Update Failure";
+            e.printStackTrace(); 
+        }
+
+        return msg;
+    }
+
 
 }

@@ -27,7 +27,7 @@ public class ServiceRequest {
     @JoinColumn(name = "technician_id", nullable = false)
     private Technician technician;
 
-//    @Enumerated(EnumType.STRING)
+
     @Column(nullable = false)
     private String
     requestType;
@@ -35,7 +35,6 @@ public class ServiceRequest {
     @Column(nullable = false)
     private String description;
 
-//    @Enumerated(EnumType.STRING)
     @Column
     private String status;
 
@@ -134,8 +133,7 @@ public class ServiceRequest {
 				+ ", updatedAt=" + updatedAt + "]";
 	}
 
-    // Getters and Setters}
-    
+   
     
     
 

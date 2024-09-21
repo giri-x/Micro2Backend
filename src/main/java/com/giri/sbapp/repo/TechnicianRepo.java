@@ -12,8 +12,6 @@ public interface TechnicianRepo {
 	String save(Technician tech);
 
 	Technician findById(int id);
-	
-//	public Optional <Technician> findById(Long id);
 
 	List<Technician>findAll();
 
